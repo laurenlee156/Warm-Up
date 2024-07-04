@@ -99,8 +99,7 @@ class Cstring:
         Returns:
             str: The character that was removed from the beginning.
         """
-        if self.lst[0] != "\0":
-            return self.lst.pop(0)
+        return self.lst.pop(0)
 
 
     def empty(self) -> None:
@@ -130,7 +129,7 @@ class Cstring:
         Raises:
             IndexError: If the index is out of the valid range for insertion.
         """
-        if index > (len(self.lst) - 2) and index < 0:
+        if index > (len(self.lst) - 1) and index < 0:
             raise IndexError
         else:
             if type(char) is list:
@@ -148,7 +147,7 @@ class Cstring:
             index (int): The index of the character to replace.
             char (str): The new character to be placed at the specified index.
         """
-        if index < len(self.lst) - 2:
+        if index >= 0 and index < len(self.lst) - 2 :
             self.lst[index] = char
 
     def strstr(self, start_index: int, end_index: int) -> 'Cstring':
@@ -166,7 +165,7 @@ class Cstring:
             IndexError: If either index is out of range.
         """
 
-        if (start_index > (len(self.lst) - 2) and end_index > (len(self.lst) - 2)) or (start_index < 0 and end_index < 0) or (start_index > end_index) or (self.lst[start_index] == self.lst[end_index]):
+        if ((start_index > (len(self.lst) - 2) and end_index > (len(self.lst) - 2)) or (start_index < 0 and end_index < 0) or (start_index > end_index) or (self.lst[start_index] == self.lst[end_index])):
             raise IndexError
         else:
             cStringParam = self.lst[start_index:end_index]
