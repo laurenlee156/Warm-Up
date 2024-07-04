@@ -53,7 +53,7 @@ class Cstring:
             IndexError: If the index is out of the valid range
         """
         # C string: ['H', 'I', '\0']
-        if index > (len(self.lst) - 1):
+        if index > (len(self.lst) - 1) and index < 0:
             raise IndexError
         else:
             return self.lst[index]
@@ -65,9 +65,10 @@ class Cstring:
         Returns:
             str: The string representation.
         """
-        for index in range(0, len(self.lst)):
-            self.lst = self.lst[index] + self.lst[index + 1]
-        return self.lst
+        newStr = ""
+        for index in range(0, len(self.lst) - 1):
+            newStr += self.lst[index]
+        return newStr
 
     def newString(self) -> 'Cstring':
         """
@@ -76,8 +77,8 @@ class Cstring:
         Returns:
             Cstring: A new instance of Cstring with the same content.
         """
-        copy_of_list = self.lst.copy()  # shallow copy
-        return copy_of_list
+        copyOfList = self.lst.copy()  # shallow copy
+        return copyOfList
 
     def append(self, char: str) -> None:
         """
@@ -87,7 +88,7 @@ class Cstring:
             char (str): The character to append.
         """
         # insert before the null character
-        # self.lst.insert(char)
+        self.lst.insert((len(self.lst) - 2), char)
 
     def pop(self) -> str:
         """
@@ -96,9 +97,7 @@ class Cstring:
         Returns:
             str: The character that was removed from the beginning.
         """
-        first_character = self.lst[0]
-        self.lst.pop(0)
-        return first_character
+        return self.lst.pop(0)
 
 
     def empty(self) -> None:
@@ -106,7 +105,6 @@ class Cstring:
         Empties the Cstring
         """
         self.lst = self.lst.clear()
-        self.lst = ''
 
     def length(self) -> int:
         """
@@ -128,10 +126,14 @@ class Cstring:
         Raises:
             IndexError: If the index is out of the valid range for insertion.
         """
-        if index > (len(self.lst) - 1):
+        if index > (len(self.lst) - 1) and index < 0:
             raise IndexError
         else:
-            self.lst.insert(index, char)
+            if type(char) is list:
+                for element in char[::-1]:  # reverses the list
+                    self.lst.insert(index, element)
+            else:
+                self.lst.insert(index, char)
 
 
     def replace(self, index: int, char: str) -> None:
@@ -158,11 +160,13 @@ class Cstring:
         Raises:
             IndexError: If either index is out of range.
         """
-        if start_index > (len(self.lst) - 1) and end_index > (len(self.lst) - 1):
+
+        if (start_index > (len(self.lst) - 1) and end_index > (len(self.lst) - 1)) or (start_index < 0 and end_index < 0) or (start_index > end_index) or (self.lst[start_index] == self.lst[end_index]):
             raise IndexError
         else:
-            new_cstring = self.lst[start_index:end_index]
-            return new_cstring
+            cStringParam = self.lst[start_index:end_index]
+            newCstring = Cstring(cStringParam)
+            return newCstring
 
 
     def strrchr(self, char: str) -> int:
@@ -175,9 +179,10 @@ class Cstring:
         Returns:
             int: The last index of the character, or -1 if not found.
         """
-        for element in self.lst:
-            if element == char:
-                index = self.lst.index(element)
-            else:
-                index = -1
-        return index
+        lastIndex = -1
+
+        for index in range(0, (len(self.lst) - 1)):
+            if self.lst[index] == char:
+                lastIndex = index
+
+        return lastIndex
