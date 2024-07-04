@@ -80,7 +80,7 @@ class Cstring:
         """
         # shallow copy
         copyOfList = self.lst.copy()
-        newList = Cstring(copyOfList)
+        newList = Cstring(copyOfList[:-1])
         return newList
 
     def append(self, char: str) -> None:
@@ -92,7 +92,6 @@ class Cstring:
         """
         # insert before the null character
         self.lst.insert((len(self.lst) - 1), char)
-        print(self.lst)
 
     def pop(self) -> str:
         """
@@ -152,7 +151,6 @@ class Cstring:
         """
         if index >= 0 and index < len(self.lst) - 1 :
             self.lst[index] = char
-        print(self.lst)
 
     def strstr(self, start_index: int, end_index: int) -> 'Cstring':
         """
