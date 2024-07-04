@@ -116,7 +116,7 @@ class Cstring:
         Returns:
             int: The length of the string.
         """
-        return len(self.lst) - 1
+        return len(self.lst) - 2
 
     def insert(self, index: int, char) -> None:
         """
