@@ -31,7 +31,7 @@ class CSentence:
         """
         newSent = ""
         for element in self.cstrings:
-            newSent += element
+            newSent += str(element)
         return newSent
 
 
