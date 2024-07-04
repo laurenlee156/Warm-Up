@@ -35,7 +35,7 @@ class Cstring:
                                        Defaults to None, which initializes an empty string.
         """
         if lst is None:
-            self.lst = []
+            self.lst = ["\0"]
         else:
             self.lst = lst
 
@@ -53,7 +53,7 @@ class Cstring:
             IndexError: If the index is out of the valid range
         """
         # C string: ['H', 'I', '\0']
-        if index > (len(self.lst) - 1) and index < 0:
+        if index > (len(self.lst) - 2) and index < 0:
             raise IndexError
         else:
             return self.lst[index]
