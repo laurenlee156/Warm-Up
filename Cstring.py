@@ -54,6 +54,8 @@ class Cstring:
             IndexError: If the index is out of the valid range
         """
         # C string: ['H', 'I', '\0']
+        if len(self.lst) == 1:
+            return ''
         if index > (len(self.lst) - 2) and index < 0:
             raise IndexError
         else:
