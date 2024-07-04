@@ -78,7 +78,7 @@ class Cstring:
             Cstring: A new instance of Cstring with the same content.
         """
         # shallow copy
-        copyOfList = self.lst[:]
+        copyOfList = self.lst.copy()
         newList = Cstring(copyOfList)
         return newList
 
@@ -116,7 +116,7 @@ class Cstring:
         Returns:
             int: The length of the string.
         """
-        return len(self.lst) - 2
+        return len(self.lst) - 1
 
     def insert(self, index: int, char) -> None:
         """
@@ -165,7 +165,7 @@ class Cstring:
             IndexError: If either index is out of range.
         """
 
-        if ((start_index > (len(self.lst) - 2) and end_index > (len(self.lst) - 2)) or (start_index < 0 and end_index < 0) or (start_index > end_index) or (self.lst[start_index] == self.lst[end_index])):
+        if ((start_index > (len(self.lst) - 2) and end_index > (len(self.lst) - 2)) or (start_index < 0 and end_index < 0) or (start_index > end_index) or (start_index == end_index)):
             raise IndexError
         else:
             cStringParam = self.lst[start_index:end_index]
