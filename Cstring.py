@@ -77,7 +77,8 @@ class Cstring:
         Returns:
             Cstring: A new instance of Cstring with the same content.
         """
-        copyOfList = self.lst.copy()  # shallow copy
+        # shallow copy
+        copyOfList = self.lst[:]
         newList = Cstring(copyOfList)
         return newList
 
@@ -98,7 +99,8 @@ class Cstring:
         Returns:
             str: The character that was removed from the beginning.
         """
-        return self.lst.pop(0)
+        if self.lst[0] != "\0":
+            return self.lst.pop(0)
 
 
     def empty(self) -> None:
@@ -184,7 +186,7 @@ class Cstring:
         """
         lastIndex = -1
 
-        for index in range(0, (len(self.lst) - 2)):
+        for index in range(0, (len(self.lst) - 1)):
             if self.lst[index] == char:
                 lastIndex = index
 
