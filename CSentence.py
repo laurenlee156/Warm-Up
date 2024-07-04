@@ -19,7 +19,7 @@ class CSentence:
         if cstrings is None:
             self.cstrings = []
         else:
-            self.cstrings = cstrings
+            self.cstrings = cstrings # list of cstrings
 
     def get_sentence(self) -> str:
         """
@@ -31,8 +31,8 @@ class CSentence:
         """
         newSent = ""
         for element in self.cstrings:
-            newSent += str(element)
-        return newSent
+            newSent += element.string() + ' '
+        return newSent[:-1]
 
 
 
