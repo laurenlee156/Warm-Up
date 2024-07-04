@@ -66,7 +66,7 @@ class Cstring:
             str: The string representation.
         """
         newStr = ""
-        for index in range(0, len(self.lst) - 1):
+        for index in range(0, len(self.lst) - 2):
             newStr += self.lst[index]
         return newStr
 
@@ -78,7 +78,8 @@ class Cstring:
             Cstring: A new instance of Cstring with the same content.
         """
         copyOfList = self.lst.copy()  # shallow copy
-        return copyOfList
+        newList = Cstring(copyOfList)
+        return newList
 
     def append(self, char: str) -> None:
         """
@@ -104,7 +105,8 @@ class Cstring:
         """
         Empties the Cstring
         """
-        self.lst = self.lst.clear()
+        self.lst.clear()
+        self.lst.append("\0")
 
     def length(self) -> int:
         """
@@ -113,7 +115,7 @@ class Cstring:
         Returns:
             int: The length of the string.
         """
-        return len(self.lst)
+        return len(self.lst) - 1
 
     def insert(self, index: int, char) -> None:
         """
@@ -144,7 +146,8 @@ class Cstring:
             index (int): The index of the character to replace.
             char (str): The new character to be placed at the specified index.
         """
-        self.lst[index] = char
+        if index < len(self.lst) - 1:
+            self.lst[index] = char
 
     def strstr(self, start_index: int, end_index: int) -> 'Cstring':
         """
