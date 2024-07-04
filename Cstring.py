@@ -55,7 +55,7 @@ class Cstring:
         """
         # C string: ['H', 'I', '\0']
         if len(self.lst) == 1:
-            return ''
+            raise IndexError
         elif index > (len(self.lst) - 2) or index < 0:
             raise IndexError
         else:
