@@ -38,6 +38,7 @@ class Cstring:
             self.lst = ["\0"]
         else:
             self.lst = lst
+            self.lst.append('\0')
 
     def at(self, index: int) -> str:
         """
@@ -66,7 +67,7 @@ class Cstring:
             str: The string representation.
         """
         newStr = ""
-        for index in range(0, len(self.lst)):
+        for index in range(0, len(self.lst) - 1):
             newStr += self.lst[index]
         return newStr
 
@@ -91,6 +92,7 @@ class Cstring:
         """
         # insert before the null character
         self.lst.insert((len(self.lst) - 1), char)
+        print(self.lst)
 
     def pop(self) -> str:
         """
@@ -99,7 +101,7 @@ class Cstring:
         Returns:
             str: The character that was removed from the beginning.
         """
-        if len(self.lst) > 2:
+        if len(self.lst) > 1:
             return self.lst.pop(0)
 
 
@@ -148,8 +150,9 @@ class Cstring:
             index (int): The index of the character to replace.
             char (str): The new character to be placed at the specified index.
         """
-        if index >= 0 and index < len(self.lst) - 2 :
+        if index >= 0 and index < len(self.lst) - 1 :
             self.lst[index] = char
+        print(self.lst)
 
     def strstr(self, start_index: int, end_index: int) -> 'Cstring':
         """
