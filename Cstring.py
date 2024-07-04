@@ -66,7 +66,7 @@ class Cstring:
             str: The string representation.
         """
         newStr = ""
-        for index in range(0, len(self.lst) - 2):
+        for index in range(0, len(self.lst)):
             newStr += self.lst[index]
         return newStr
 
